@@ -1,88 +1,75 @@
 <template>
-  <div class='discover-playlist'>
-      <h3>推荐歌单</h3>
-      <!-- <div>123</div> -->
-      <div class="content">
-            <div class="playlist" v-for=" item in Resource" :key="item.id">
-              <div class="item-img">
-              <div class="box">{{item.copywriter}}</div>
-             <el-image :src="item.picUrl">
-            </el-image>
-            <span class="iconfont iconicon_play"></span>
-              </div>
-               <el-tooltip
+  <div class='discover-mvs'>
+      <h3>推荐MV</h3>
+      <el-row class="mv" :gutter="20">
+        <el-col :xs="12" :lg="6" v-for="mv in mvs" :key="mv.id">
+           <div class="mv-img">
+                <div class="box">{{mv.copywriter}}</div>
+                <el-image :src="mv.picUrl"/>
+                <span class="iconfont iconicon_play"></span>
+                <span class="playCount">  <i class="iconfont iconluxiang"></i>   {{mv.playCount}}</span>
+           </div>
+             <el-tooltip
                class="item"
                effect="dark"
-               :content="item.name "
+               :content="mv.name "
                placement="top"
                >
-                <span>{{ item.name }}</span>
+                <span>{{ mv.name }}</span>
                 </el-tooltip>
-             <!-- <span>123213</span> -->
-        </div>
-      </div>
+        </el-col>
+      </el-row>
+
   </div>
 </template>
 <script>
-import { getResource } from '@/api/music'
+import { getMvs } from '@/api/music'
 export default {
-  name: 'DiscoverPlaylist',
+  name: 'DiscoverMvs',
   props: {},
   components: {},
   data () {
     return {
-      Resource: []
+      mvs: []
     }
   },
   computed: {},
   watch: {},
   methods: {
-    async getResource () {
-      const { data } = await getResource({ limit: 10 })
-      //   const {}
-      //   console.log(result)
-      this.Resource.push(...data.result)
+    async getMvs () {
+      const { data } = await getMvs()
+      this.mvs.push(...data.result)
+      console.log(this.mvs)
     }
   },
   created () {
-    this.getResource()
+    this.getMvs()
   },
   mounted () {},
   beforeDestroy () {}
 }
 </script>
 <style lang='less' scoped>
-h3{
+.discover-mvs{
+  margin-bottom: 100px;
+}
+  h3{
     padding-left: 20px;
     font-weight: 400;
-}
-.content{
-    // display: flex;
-    // flex-wrap: wrap;
-    margin: 0 auto;
-    width: 1100px;
-    height: 486px;
-    // overflow: hidden;
-    .playlist{
-        float: left;
-        // flex: 18%;
-        margin-left: 15px;
-        margin-bottom: 40px;
-        width: 200px;
-        height: 200px;
-        // background-color: red;
-        .item-img{
-             position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-             .box{
+ }
+ .mv{
+     height: 150px;
+      .mv-img{
+          width: 262px;
+          position: relative;
+          overflow: hidden;
+          .box{
             padding: 5px;
             box-sizing: border-box;
             position: absolute;
             top: -50px;
-            left: 0;
-            width: 200px;
+            left: 0px;
+            width: 262px;
             // height: 48px;
             // max-height: 50px;
             // height: 0;
@@ -97,23 +84,34 @@ h3{
             // animation: animate 5s ease infinite;
             //  overflow: hidden;
         }
+        .playCount{
+          width: 80px;
+          border-radius: 10px;
+          position: absolute;
+          display: inline-block;
+          text-align: center;
+          background: rgba(0, 0, 0, .5);
+          right: 2px;
+          bottom: 5px;
+          color: #fff;
+        }
          /deep/ .iconicon_play{
-             background: hsla(0,0%,100%,.8);
-             border-radius: 50%;
-             cursor: pointer;
-                right: 20px;
+                background: hsla(0,0%,100%,.8);
+                border-radius: 50%;
+                cursor: pointer;
+                right: 111px;
+                bottom: 54px;
                 width: 40px;
                 height: 40px;
                 line-height: 40px;
                 font-size: 40px;
                 position: absolute;
                 /* left: 0; */
-                bottom: 21px;
                 color: #dd6d60;
                 opacity: 0;
                 transition: all .5s;
             }
-        }
+      }
         span{
             margin-top: 5px;
             // overflow: none;
@@ -121,20 +119,18 @@ h3{
             // text-align: center;
             font-size: 14px;
             // z-index: 20;
-              overflow: hidden;
+                overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
         }
-    }
-}
-  .playlist:hover .item-img .box{
+     }
+     .mv:hover .mv-img .box{
          top:0;
          max-height: 50px;
       }
-  .playlist:hover .item-img .iconicon_play{
+      .mv:hover .mv-img .iconicon_play{
        opacity: 1;
       }
-
 </style>

@@ -21,28 +21,24 @@
      <discover-playlist />
       <!-- 最新音乐 -->
       <discover-songs
-      @play-music="onPlayMusic"
       />
-       <!-- <div class="play">
-         <audio
-         :src="musicUrl"
-         controls="controls"
-         autoplay="autoplay">
-            </audio>
-        </div> -->
+      <!-- 推荐MV -->
+      <discover-mvs />
   </div>
 </template>
 <script>
 import DiscoverPlaylist from './components/discover-playlist'
 import DiscoverSongs from './components/discover-songs'
+import DiscoverMvs from './components/discover-mvs'
 import { getBanner } from '@/api/music'
-import globalBus from '@/utils/global-bus'
+// import globalBus from '@/utils/global-bus'
 export default {
   name: 'DiscoverIndex',
   props: {},
   components: {
     DiscoverPlaylist,
-    DiscoverSongs
+    DiscoverSongs,
+    DiscoverMvs
   },
   data () {
     return {
@@ -57,13 +53,14 @@ export default {
       const { data } = await getBanner()
       console.log(data)
       this.banners = data.banners
-    },
-    onPlayMusic (url) {
-      this.musicUrl = url
-      globalBus.$emit('play-music', url)
-      this.$parent.musicUrl = url
-      console.log(this.$parent.musicUrl)
     }
+    // onPlayMusic (url) {
+    //   this.musicUrl = url
+    //   globalBus.$emit('play-music', url)
+    //   // this.$store.commit('setMusicUrl', url)
+    //   this.$parent.musicUrl = url
+    //   console.log(this.$parent.musicUrl)
+    // }
   },
   created () {
     this.getBanner()

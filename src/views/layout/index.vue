@@ -25,40 +25,59 @@
     </el-container>
   </el-container>
    <div class="play">
-         <audio
-         :src="musicUrl"
-         controls="controls"
-         autoplay="autoplay">
-            </audio>
-        </div>
+      <audio
+      :src="musicUrl"
+      controls="controls"
+      autoplay="autoplay">
+      </audio>
+    </div>
+     <!-- <div style="width: 60%">
+         <aplayer :music="videoUpload.music"></aplayer>
+    </div> -->
 </el-container>
 </template>
 <script>
+// import aplayer from 'vue-aplayer'
 import AppAside from './components/aside'
-import globalBus from '@/utils/global-bus'
+// import globalBus from '@/utils/global-bus'
+import { mapState } from 'vuex'
 export default {
   name: 'LayoutIndex',
   props: {},
   components: {
     AppAside
+    // aplayer
   },
   data () {
     return {
       massage: '',
-      musicUrl: ''
+      // musicUrl: '',
+      videoUpload: {
+        progress: false,
+        progressPercent: 0,
+        successPercent: 0,
+        music: {
+          title: '',
+          author: '',
+          url: '',
+          lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'
+        }
+      }
     }
   },
-  computed: {},
+  computed: {
+    ...mapState(['musicUrl'])
+  },
   watch: {},
   methods: {
   },
   created () {
-    console.log(this.musicUrl)
+    // console.log(this.musicUrl)
   },
   mounted () {
-    globalBus.$on('play-music', (musicUrl) => {
-      this.musicUrl = musicUrl
-    })
+    // globalBus.$on('play-music', (musicUrl) => {
+    //   this.musicUrl = musicUrl
+    // })
   },
   beforeDestroy () {}
 }

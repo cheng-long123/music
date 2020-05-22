@@ -43,12 +43,14 @@ export default {
       const { data } = await getNewsong()
       console.log(data)
       this.newsongs = data.result
+      this.$emit('singer', data.result)
     },
     async onPlay (playId) {
       const { data } = await getMusicUrl({ id: playId })
       //   console.log(data)
       this.url = data.data[0].url
-      this.$emit('play-music', data.data[0].url)
+      this.$store.commit('setMusicUrl', data.data[0].url)
+      // this.$emit('play-music', data.data[0].url)
     //   this.$parent.MusicUrl = url
     }
   },
@@ -82,6 +84,7 @@ h3{
     }
     .iconicon_play{
        position: absolute;
+       cursor: pointer;
         width: 30px;
         height: 30px;
         top: 35px;

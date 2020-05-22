@@ -46,5 +46,12 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+    next('/discover')
+  } else {
+    next()
+  }
+})
 
 export default router

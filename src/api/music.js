@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+// import jsonp from '@/utils/common.js'
 // 轮播图
 export const getBanner = () => {
   return request({
@@ -27,6 +28,29 @@ export const getMusicUrl = params => {
   return request({
     method: 'GET',
     url: '/song/url',
+    params
+  })
+}
+// 推荐mv
+export const getMvs = () => {
+  return request({
+    method: 'GET',
+    url: '/personalized/mv'
+  })
+}
+// 精品歌单
+export const getHighquality = params => {
+  return request({
+    method: 'GET',
+    url: '/top/playlist/highquality',
+    params
+  })
+}
+// 歌单列表
+export const getPlaylist = params => {
+  return request({
+    method: 'GET',
+    url: '/top/playlist/',
     params
   })
 }
