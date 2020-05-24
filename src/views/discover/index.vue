@@ -51,7 +51,7 @@ export default {
   methods: {
     async getBanner () {
       const { data } = await getBanner()
-      console.log(data)
+      // console.log(data)
       this.banners = data.banners
     }
     // onPlayMusic (url) {

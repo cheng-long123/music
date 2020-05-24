@@ -114,10 +114,10 @@ export default {
     top: 0;
     bottom: 0;
     .el-header{
-         background-color: hsla(0,0%,98%,.5);
+         background-color: hsla(0,0%,98%,.7);
     }
     .el-aside{
-       background-color: hsla(0,0%,98%,.5);
+       background-color: hsla(0,0%,98%,.7);
     }
 
     .el-header{
@@ -133,7 +133,7 @@ export default {
 .search{
     display: flex;
     float: right;
-    width: 180px;
+    width: 200px;
 }
 .play{
    audio{

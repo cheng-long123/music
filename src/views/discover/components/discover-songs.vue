@@ -41,7 +41,7 @@ export default {
   methods: {
     async getNewsong () {
       const { data } = await getNewsong()
-      console.log(data)
+      // console.log(data)
       this.newsongs = data.result
       this.$emit('singer', data.result)
     },

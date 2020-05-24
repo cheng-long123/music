@@ -54,3 +54,19 @@ export const getPlaylist = params => {
     params
   })
 }
+// 推荐新音乐
+export const getNewsongs = params => {
+  return request({
+    method: 'GET',
+    url: '/top/song',
+    params
+  })
+}
+// 播放新音乐
+export const playNewMusic = params => {
+  return request({
+    method: 'GET',
+    url: 'song/url',
+    params
+  })
+}

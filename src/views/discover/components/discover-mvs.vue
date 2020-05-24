@@ -39,7 +39,7 @@ export default {
     async getMvs () {
       const { data } = await getMvs()
       this.mvs.push(...data.result)
-      console.log(this.mvs)
+      // console.log(this.mvs)
     }
   },
   created () {

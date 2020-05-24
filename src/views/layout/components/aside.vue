@@ -13,7 +13,7 @@
       </el-menu-item>
       <el-menu-item index="/playlists">
         <i class="iconfont icongedan"></i>
-        <span slot="title">推荐音乐</span>
+        <span slot="title">推荐歌单</span>
       </el-menu-item>
       <el-menu-item index="/songs" >
         <i class="iconfont iconyinyue"></i>
@@ -61,5 +61,8 @@ export default {
 .iconfont{
   font-size: 20px;
   margin-right: 20px;
+}
+.el-menu-item {
+  font-size: 18px;
 }
 </style>
