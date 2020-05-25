@@ -1,15 +1,25 @@
 <template>
     <el-container class='layout-container'>
         <el-header>
-            <i class="el-icon-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <i class="el-icon-arrow-right"></i>
+          <div class="title-name">
+            <el-tag>C</el-tag>
+            <el-tag type="success">L</el-tag>
+            <el-tag type="info">的</el-tag>
+            <el-tag type="warning">音</el-tag>
+            <el-tag type="danger">月</el-tag>
+          </div>
+           <div class="btn">
+              <i class="el-icon-arrow-left" @click="$router.back()"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="el-icon-arrow-right" @click="history"></i>
+           </div>
             <div class="search">
                 <el-input
                 v-model="massage"
                 size="mini"
-                placeholder="请输入内容"
+                placeholder="搜索"
                 >
                 </el-input>
+                <i class="iconfont iconsearch"></i>
             </div>
         </el-header>
    <el-container>
@@ -70,6 +80,9 @@ export default {
   },
   watch: {},
   methods: {
+    history () {
+      history.forward()
+    }
   },
   created () {
     // console.log(this.musicUrl)
@@ -114,6 +127,7 @@ export default {
     top: 0;
     bottom: 0;
     .el-header{
+      position: relative;
          background-color: hsla(0,0%,98%,.7);
     }
     .el-aside{
@@ -134,10 +148,47 @@ export default {
     display: flex;
     float: right;
     width: 200px;
+    position: relative;
+    .iconsearch{
+      position: absolute;
+      top: 2px;
+      left: 10px;
+      color: gray;
+    }
+    .el-input{
+      /deep/ input{
+            padding: 0 30px;
+      }
+    }
 }
 .play{
    audio{
         width: 100%;
    }
+}
+.btn{
+  position: absolute;
+  top: 0;
+  left: 203px;
+  width: 100px;
+  height: 60px;
+  font-size: 30px;
+  color:grey;
+  text-align: center;
+  line-height: 60px;
+  cursor: pointer;
+  i{
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+  }
+}
+i:hover{
+  background: rgba(190, 185, 185, 0.9);
+}
+.title-name{
+width: 170px;
+float: left;
 }
 </style>

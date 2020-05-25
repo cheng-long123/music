@@ -70,3 +70,11 @@ export const playNewMusic = params => {
     params
   })
 }
+// 获取MV
+export const getAllMvs = params => {
+  return request({
+    method: 'GET',
+    url: '/mv/all',
+    params
+  })
+}
