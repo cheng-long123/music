@@ -3,7 +3,7 @@
       <h3>推荐歌单</h3>
       <!-- <div>123</div> -->
       <div class="content">
-            <div class="playlist" v-for=" item in Resource" :key="item.id">
+            <div class="playlist" v-for=" item in Resource" :key="item.id" @click="toSongplay(item.id)" >
               <div class="item-img">
               <div class="box">{{item.copywriter}}</div>
              <el-image :src="item.picUrl">
@@ -42,6 +42,9 @@ export default {
       //   const {}
       //   console.log(result)
       this.Resource.push(...data.result)
+    },
+    toSongplay (id) {
+      this.$router.push(`/songplay?id=${id}`)
     }
   },
   created () {

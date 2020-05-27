@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="tr" v-for="(item, index) in songs" :key="index" @click="playMusic(item.id)">
+          <tr class="tr" v-for="(item, index) in songs" :key="index" @dblclick="playMusic(item.id)">
             <td>{{index+1}}</td>
             <td>
               <div class="img" @click="playMusic(item.id)">

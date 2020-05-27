@@ -17,6 +17,7 @@
                 v-model="massage"
                 size="mini"
                 placeholder="搜索"
+                @change="toSearch"
                 >
                 </el-input>
                 <i class="iconfont iconsearch"></i>
@@ -82,6 +83,16 @@ export default {
   methods: {
     history () {
       history.forward()
+    },
+    toSearch () {
+      if (this.massage === '') {
+        this.$message({
+          message: '请输入内容',
+          type: 'warning'
+        })
+      } else {
+        this.$router.push('/search?q=' + this.massage)
+      }
     }
   },
   created () {

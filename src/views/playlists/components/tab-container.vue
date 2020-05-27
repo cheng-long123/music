@@ -101,7 +101,7 @@
         </span>
       </div>
        <div class="content clearfix">
-            <div class="playlist" v-for="(item, index) in playlist" :key="index">
+            <div class="playlist" v-for="(item, index) in playlist" :key="index" @click="toSongplay(item.id)">
               <div class="item-img">
               <div class="box">{{item.playCount}}</div>
              <el-image :src="item.coverImgUrl">
@@ -162,14 +162,22 @@ export default {
         offset: (this.page - 1) * 20,
         cat: this.tag
       })
-      console.log(data)
+      // console.log(data)
       this.playlist = data.playlists
       this.total = data.total
+      this.playlist.forEach(value => {
+        if (value.playCount >= 100000) {
+          value.playCount = parseInt(value.playCount / 10000) + '万'
+        }
+      })
       this.$emit('tag', this.tag)
     },
     currentChange (page) {
       this.page = page
       this.getPlaylist()
+    },
+    toSongplay (id) {
+      this.$router.push(`/songplay?id=${id}`)
     }
   },
   created () {

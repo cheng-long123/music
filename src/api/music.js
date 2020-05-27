@@ -78,3 +78,19 @@ export const getAllMvs = params => {
     params
   })
 }
+// 搜索
+export const getSearchResult = params => {
+  return request({
+    method: 'GET',
+    url: '/search',
+    params
+  })
+}
+// 歌单详情
+export const getDdetail = params => {
+  return request({
+    method: 'GET',
+    url: '/playlist/detail',
+    params
+  })
+}
