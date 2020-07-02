@@ -6,7 +6,7 @@
             <el-tag type="success">L</el-tag>
             <el-tag type="info">的</el-tag>
             <el-tag type="warning">音</el-tag>
-            <el-tag type="danger">月</el-tag>
+            <el-tag type="danger">乐</el-tag>
           </div>
            <div class="btn">
               <i class="el-icon-arrow-left" @click="$router.back()"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
