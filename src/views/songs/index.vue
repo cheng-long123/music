@@ -61,7 +61,7 @@
               <div class="title">
                 <div class="title-text">
                   <span>{{item.name}}</span>
-                  <span class="iconfont iconshipin" @click="$router.push(`/mv?id=${item.mvid}`)"></span>
+                  <span class="iconfont iconshipin" v-if="item.mvid != 0" @click="$router.push(`/mv?id=${item.mvid}`)"></span>
                 </div>
                 <span class="singer">{{item.name}}</span>
               </div>
