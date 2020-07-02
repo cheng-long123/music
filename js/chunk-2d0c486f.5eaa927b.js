@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c486f"],{"3ae0":function(n,t,e){"use strict";e.r(t);var c=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",{staticClass:"collect-container"},[n._v("收藏音乐")])},o=[],a={name:"CollectIndex",props:{},components:{},data:function(){return{}},computed:{},watch:{},methods:{},created:function(){},mounted:function(){},beforeDestroy:function(){}},u=a,r=e("2877"),s=Object(r["a"])(u,c,o,!1,null,"25fb1915",null);t["default"]=s.exports}}]);
+//# sourceMappingURL=chunk-2d0c486f.5eaa927b.js.map
