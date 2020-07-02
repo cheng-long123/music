@@ -13,6 +13,7 @@
     "dayjs": "^1.8.27",
     "element-ui": "^2.13.2",
     "jsonp": "^0.2.1",
+    "serve": "^11.3.2",
     "vue": "^2.6.11",
     "vue-aplayer": "^1.6.1",
     "vue-router": "^3.1.6",
