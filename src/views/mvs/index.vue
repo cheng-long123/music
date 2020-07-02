@@ -116,7 +116,7 @@
     </div>
    </div>
    <el-row :gutter="20">
-    <el-col class="mvs" :xs="12" :lg="6" :span="6" v-for="(item, index) in mvs" :key="index">
+    <el-col class="mvs" :xs="12" :lg="6" :span="6" v-for="(item, index) in mvs" :key="index" @click.native="toMV(item.id)">
        <el-image :src="item.cover"></el-image>
        <div class="plays">
          <i class="iconfont iconbofang1"></i>
@@ -195,6 +195,9 @@ export default {
     handleCurrentChange (page) {
       this.page = page
       this.getAllMvs()
+    }, // 跳转到mv详情
+    toMV (id) {
+      this.$router.push(`/mv?id=${id}`)
     }
   },
   created () {

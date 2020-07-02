@@ -24,7 +24,7 @@
               <div class="title">
                 <div class="title-text">
                   <span>{{item.name}}</span>
-                   <span class="iconfont iconshipin" v-if="item.mvid != 0"></span>
+                   <span class="iconfont iconshipin" v-if="item.mvid != 0" @click="$router.push(`/mv?id=${item.mvid}`)"></span>
                 </div>
                 <span class="singer" v-if="item.alias.length != 0">{{item.alias[0]}}</span>
               </div>
@@ -54,7 +54,7 @@
         <!-- mv -->
         <el-tab-pane label="MV" name="mvs">
       <el-row :gutter="20">
-        <el-col class="mvs" :xs="12" :lg="6" :span="6" v-for="(item, index) in mvs " :key="index">
+        <el-col class="mvs" :xs="12" :lg="6" :span="6" v-for="(item, index) in mvs " :key="index" @click.native="$router.push(`/mv?id = ${item.id}`)">
         <el-image :src="item.cover"></el-image>
          <span class="iconfont iconicon_play"></span>
          <span class="time">{{item.duration |time}}</span>

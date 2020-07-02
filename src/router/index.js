@@ -48,6 +48,11 @@ const routes = [
         path: '/songplay',
         name: 'songplay',
         component: () => import('@/views/songplay')
+      },
+      {
+        path: '/mv',
+        name: 'mv',
+        component: () => import('@/views/mv')
       }
     ]
   }

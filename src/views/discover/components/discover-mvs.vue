@@ -2,12 +2,12 @@
   <div class='discover-mvs'>
       <h3>推荐MV</h3>
       <el-row class="mv" :gutter="20">
-        <el-col :xs="12" :lg="6" v-for="mv in mvs" :key="mv.id">
+        <el-col :xs="12" :lg="6" v-for="mv in mvs" :key="mv.id" @click.native="toMv(mv.id)">
            <div class="mv-img">
                 <div class="box">{{mv.copywriter}}</div>
                 <el-image :src="mv.picUrl"/>
                 <span class="iconfont iconicon_play"></span>
-                <span class="playCount">  <i class="iconfont iconluxiang"></i>   {{mv.playCount}}</span>
+                <span class="playCount">  <i class="iconfont iconluxiang"></i>{{mv.playCount}}</span>
            </div>
              <el-tooltip
                class="item"
@@ -40,6 +40,9 @@ export default {
       const { data } = await getMvs()
       this.mvs.push(...data.result)
       // console.log(this.mvs)
+    },
+    toMv (id) {
+      this.$router.push(`/mv?id=${id}`)
     }
   },
   created () {
@@ -94,6 +97,9 @@ export default {
           right: 2px;
           bottom: 5px;
           color: #fff;
+          .iconluxiang{
+            margin-right: 8px;
+          }
         }
          /deep/ .iconicon_play{
                 background: hsla(0,0%,100%,.8);

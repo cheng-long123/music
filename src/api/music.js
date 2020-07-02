@@ -94,3 +94,59 @@ export const getDdetail = params => {
     params
   })
 }
+// 获取热门评论
+export const getHot = params => {
+  return request({
+    method: 'GET',
+    url: '/comment/hot',
+    params
+  })
+}
+// 获取最新评论
+export const getNewComment = params => {
+  return request({
+    method: 'GET',
+    url: '/comment/playlist',
+    params
+  })
+}
+// 获取mv
+export const getMv = params => {
+  return request({
+    method: 'GET',
+    url: '/mv/url',
+    params
+  })
+}
+// mv相关
+export const geSimitMv = params => {
+  return request({
+    method: 'GET',
+    url: '/simi/mv',
+    params
+  })
+}
+// 获取mv相关的信息
+export const gedetail = params => {
+  return request({
+    method: 'GET',
+    url: '/mv/detail',
+    params
+  })
+}
+// 获取歌手信息
+export const geArtists = params => {
+  return request({
+    method: 'GET',
+    url: '/artists',
+    params
+  })
+}
+// 获取mv评论
+export const geMvComment = params => {
+  return request({
+    method: 'GET',
+    url: '/comment/mv',
+    params
+  })
+}

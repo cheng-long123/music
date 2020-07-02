@@ -72,22 +72,23 @@
         >
         </el-pagination> -->
         </el-tab-pane>
-        <el-tab-pane label="评论" name="comment">
+        <el-tab-pane  name="comment">
+          <span slot="label">评论({{newtotal}})</span>
             <div class="comment-wrap">
-          <p class="title">精彩评论<span class="number">(666)</span></p>
+          <p class="title">精彩评论<span class="number">({{hottotal}})</span></p>
           <div class="comments-wrap">
-            <div class="item">
+            <div class="item" v-for="(item, index) in hotComment" :key="index">
               <div class="icon-wrap">
-                <img src="https://p4.music.126.net/MFe7QwzLxgEtXoaI58EY6g==/109951165015542415.jpg" alt="" />
+                <img :src="item.user.avatarUrl" alt="" />
               </div>
               <div class="content-wrap">
                 <div class="content">
-                  <span class="name">爱斯基摩：</span>
-                  <span class="comment">谁说的，长大了依旧可爱哈</span>
+                  <span class="name">{{item.user.nickname}}：</span>
+                  <span class="comment">{{item.content}}</span>
                 </div>
-                <div class="re-content">
-                  <span class="name">小苹果：</span>
-                  <span class="comment">还是小时候比较可爱</span>
+                <div class="re-content" v-if="item.beReplied.length !== 0">
+                  <span class="name">{{item.beReplied[0].user.nickname}}：</span>
+                  <span class="comment">{{item.beReplied[0].content}}</span>
                 </div>
                 <div class="date">2020-02-12 17:26:11</div>
               </div>
@@ -96,54 +97,22 @@
         </div>
         <!-- 最新评论 -->
         <div class="comment-wrap">
-          <p class="title">最新评论<span class="number">(666)</span></p>
+          <p class="title">最新评论<span class="number">({{newtotal}})</span></p>
           <div class="comments-wrap">
-            <div class="item">
+            <div class="item" v-for="(item, index) in newComment" :key="index">
               <div class="icon-wrap">
-                <img src="https://p4.music.126.net/MFe7QwzLxgEtXoaI58EY6g==/109951165015542415.jpg" alt="" />
+                <img :src="item.user.avatarUrl" alt="" />
               </div>
               <div class="content-wrap">
                 <div class="content">
-                  <span class="name">爱斯基摩：</span>
-                  <span class="comment">谁说的，长大了依旧可爱哈</span>
+                  <span class="name">{{item.user.nickname}}：</span>
+                  <span class="comment">{{item.content}}</span>
                 </div>
-                <div class="re-content">
-                  <span class="name">小苹果：</span>
-                  <span class="comment">还是小时候比较可爱还是小时候比较可爱</span>
+                <div class="re-content" v-if="item.beReplied.length !== 0">
+                  <span class="name">{{item.beReplied[0].user.nickname}}：</span>
+                  <span class="comment">{{item.beReplied[0].content}}</span>
                 </div>
-                <div class="date">2020-02-12 17:26:11</div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="icon-wrap">
-                <img src="https://p4.music.126.net/MFe7QwzLxgEtXoaI58EY6g==/109951165015542415.jpg" alt="" />
-              </div>
-              <div class="content-wrap">
-                <div class="content">
-                  <span class="name">爱斯基摩：</span>
-                  <span class="comment">谁说的，长大了依旧可爱哈</span>
-                </div>
-                <div class="re-content">
-                  <span class="name">小苹果：</span>
-                  <span class="comment">还是小时候比较可爱</span>
-                </div>
-                <div class="date">2020-02-12 17:26:11</div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="icon-wrap">
-                <img src="https://p4.music.126.net/MFe7QwzLxgEtXoaI58EY6g==/109951165015542415.jpg" alt="" />
-              </div>
-              <div class="content-wrap">
-                <div class="content">
-                  <span class="name">爱斯基摩：</span>
-                  <span class="comment">谁说的，长大了依旧可爱哈</span>
-                </div>
-                <div class="re-content">
-                  <span class="name">小苹果：</span>
-                  <span class="comment">还是小时候比较可爱</span>
-                </div>
-                <div class="date">2020-02-12 17:26:11</div>
+                <div class="date">{{item.time| datetime}}</div>
               </div>
             </div>
           </div>
@@ -153,7 +122,7 @@
           @current-change="handleCurrentChange"
           background
           layout="prev, pager, next"
-          :total="100"
+          :total="newtotal"
           :current-page="page"
           :page-size="5"
         >
@@ -163,7 +132,7 @@
   </div>
 </template>
 <script>
-import { getDdetail, playNewMusic } from '@/api/music'
+import { getDdetail, playNewMusic, getHot, getNewComment } from '@/api/music'
 export default {
   name: 'SongPlay',
   props: {},
@@ -173,7 +142,11 @@ export default {
       activeName: 'list',
       limit: 20,
       page: 1,
-      playlist: {}
+      playlist: {},
+      hotComment: [], // 热门评论
+      hottotal: 0,
+      newComment: [],
+      newtotal: 0
     }
   },
   computed: {},
@@ -184,10 +157,11 @@ export default {
         id: this.$route.query.id
       })
       this.playlist = data.playlist
-      console.log(data)
+      // console.log(data)
     },
     handleCurrentChange (page) {
-
+      this.page = page
+      this.getNewComment()
     }, // 播放音乐
     async playMusic (musicId) {
       const { data } = await playNewMusic({
@@ -196,10 +170,34 @@ export default {
       const url = data.data[0].url
       // console.log(url)
       this.$store.commit('setMusicUrl', url)
+    },
+    // 获取热门评论
+    async getHot () {
+      const { data } = await getHot({
+        id: this.$route.query.id,
+        type: 2
+      })
+      this.hotComment = data.hotComments
+      this.hottotal = data.total
+      // console.log(data)
+    }, // 获取最新评论
+    async getNewComment () {
+      const { data } = await getNewComment({
+        id: this.$route.query.id,
+        limit: 10,
+        offset: (this.page - 1) * 10
+      })
+      this.newComment = data.comments
+      this.newtotal = data.total
+      console.log(data)
     }
   },
   created () {
     this.getDdetail()
+    // 获取评论
+    this.getHot()
+    // 获取最新评论
+    this.getNewComment()
   },
   mounted () {},
   beforeDestroy () {}
@@ -387,11 +385,10 @@ tbody .tr:hover {
             margin-top: 20px;
             .icon-wrap{
                 width: 50px;
-                height: 50px;
                 margin-right: 10px;
                 img{
-                    width: 100%;
-                    height: 100%;
+                    width: 50px;
+                    height: 50px;
                     border-radius: 50%;
                 }
             }
@@ -412,7 +409,7 @@ tbody .tr:hover {
             }
         }
         .re-content{
-            width: 100%;
+            // width: 100%;
             font-size: 14px;
             background-color: #e6e5e6;
             border-radius: 5px;
