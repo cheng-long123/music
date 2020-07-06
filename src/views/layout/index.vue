@@ -20,7 +20,7 @@
                 @change="toSearch"
                 >
                 </el-input>
-                <i class="iconfont iconsearch"></i>
+                <i class="iconfont  iconsearch"></i>
             </div>
         </el-header>
    <el-container>
@@ -38,8 +38,11 @@
    <div class="play">
       <audio
       :src="musicUrl"
-      controls="controls"
-      autoplay="autoplay">
+      controls
+      autoplay
+      loop
+      preload
+      >
       </audio>
     </div>
      <!-- <div style="width: 60%">
@@ -155,7 +158,7 @@ export default {
     // right: 0px;
     // }
 }
-.search{
+  /deep/  .search{
     display: flex;
     float: right;
     width: 200px;
@@ -166,6 +169,7 @@ export default {
       left: 10px;
       color: gray;
     }
+    input:focus{border-color:pink}
     .el-input{
       /deep/ input{
             padding: 0 30px;
@@ -195,7 +199,10 @@ export default {
     border-radius: 50%;
   }
 }
-i:hover{
+ .el-icon-arrow-right:hover{
+  background: rgba(190, 185, 185, 0.9);
+}
+.el-icon-arrow-left:hover{
   background: rgba(190, 185, 185, 0.9);
 }
 .title-name{

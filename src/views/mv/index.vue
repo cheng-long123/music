@@ -65,7 +65,7 @@
                 <span class="name">{{item.beReplied[0].user.nickname}}：</span>
                 <span class="comment">还{{item.beReplied[0].content}}</span>
               </div>
-              <div class="date">{{item.time | datetime}</div>
+              <div class="date">{{item.time | datetime}}</div>
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@ export default {
         id: data.data.artists[0].id
       })
       this.avatar = res.data.artist.img1v1Url
-      console.log(res)
+      // console.log(res)
     },
     async geMvComment () {
       const { data } = await geMvComment({
@@ -181,7 +181,7 @@ export default {
       this.comments = data.comments
       this.total = data.total
       this.hotComments = data.hotComments
-      console.log(data)
+      // console.log(data)
     },
     handleCurrentChange (page) {
       this.page = page

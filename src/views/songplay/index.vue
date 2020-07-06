@@ -51,7 +51,7 @@
               <div class="title">
                 <div class="title-text">
                   <span>{{item.name}}</span>
-                  <span class="iconfont iconshipin" v-if="item.mv != 0" @click="playMusic(item.id)"></span>
+                  <span class="iconfont iconshipin" v-if="item.mv != 0" @click="$router.push(`/mv?id=${item.mv}`)"></span>
                 </div>
                 <span class="singer">{{item.alia[0]}}</span>
               </div>
@@ -189,7 +189,7 @@ export default {
       })
       this.newComment = data.comments
       this.newtotal = data.total
-      console.log(data)
+      // console.log(data)
     }
   },
   created () {
